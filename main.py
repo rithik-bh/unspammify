@@ -94,19 +94,19 @@ for club in res:
     CLUBS[club[1]]['endpoint'] = club[1]
     CLUBS[club[1]]['description'] = club[2]
     CLUBS[club[1]]['announcements'] = []
-    CLUBS[club[1]]['ids'] = []
-    CLUBS[club[1]]['date'] = []
-    CLUBS[club[1]]['time'] = []
-    CLUBS[club[1]]['venue'] = []
     CLUBS[club[1]]['total-announcements'] = 0
 
 for club in club_data:
-    CLUBS[club[1]]['announcements'].append(club[5])
-    CLUBS[club[1]]['ids'].append(club[0])
-    CLUBS[club[1]]['date'].append(club[2])
-    CLUBS[club[1]]['time'].append(club[3])
-    CLUBS[club[1]]['venue'].append(club[4])
-    EVENT_IDS.extend(CLUBS[club[1]]['ids'])
+    CLUBS[club[1]]['announcements'].append(
+        {
+            'id':club[0],
+            'URL_Name':club[1],
+            'date':datetime.strptime(club[2], '%Y-%m-%d').strftime('%d/%m/%Y'),
+            'time':club[3],
+            'venue':club[4],
+            'description':club[5]
+        })
+    EVENT_IDS.extend(club[0])
     CLUBS[club[1]]['total-announcements'] += 1
 
 @app.route("/")
@@ -193,7 +193,7 @@ def logged_in(user_id):
         cur.close()
         # print(event_data)
 
-        return render_template('logged-in-homepage.html',user_id=user_id ,name=name, event_data=event_data, length=len(event_data))
+        return render_template('logged-in-homepage.html',user_id=user_id ,name=name,CLUBS=CLUBS, event_data=event_data, length=len(event_data))
     else:
         flash(f"User with ID '{user_id}' Is Not Logged In", 'error')
         print(f"User with ID '{user_id}' Is Not Logged In")
@@ -440,12 +440,16 @@ def club_names_add_event(club_name):
                 mycursor.close()
                 database.close()
 
-                CLUBS[club_name]['announcements'].append(description)
-                CLUBS[club_name]['ids'].append(random_id)
+                CLUBS[club_name]['announcements'].append(
+                    {
+                        'id':random_id,
+                        'URL_Name':club_name,
+                        'date':date,
+                        'time':time,
+                        'venue':venue,
+                        'description':description
+                    })
                 CLUBS[club_name]['total-announcements'] += 1
-                CLUBS[club_name]['date'].append(date)
-                CLUBS[club_name]['time'].append(time)
-                CLUBS[club_name]['venue'].append(venue)
                 EVENT_IDS.append(random_id)
 
                 # CLUBS,EVENT_IDS=updateCLUBS(CLUBS,EVENT_IDS)
@@ -481,7 +485,7 @@ def clubs_modify_event(club_name,EventID):
             cursor=database.cursor()
             cursor.execute("SELECT * FROM club_events WHERE EventID=%s",[EventID])
             res=cursor.fetchone()
-            # print(res)
+            print(res)
 
             form=ModifyEvent(request.form,date=datetime.strptime(res[2],'%Y-%m-%d').date(),time=res[3],venue=res[4],description=res[5])
             if request.method=="POST" and form.validate():
@@ -503,11 +507,14 @@ def clubs_modify_event(club_name,EventID):
                 database.commit()
                 flash("Event Modified Successfully",'message')
 
-                index=CLUBS[club_name]['ids'].index(EventID)
-                CLUBS[club_name]['announcements'][index]=description
-                CLUBS[club_name]['date'][index]=date
-                CLUBS[club_name]['time'][index]=time
-                CLUBS[club_name]['venue'][index]=venue
+
+                for event in CLUBS[club_name]['announcements']:
+                    if event['id']==EventID:
+                        event['date']=datetime.strptime(date, '%Y-%m-%d').strftime('%d/%m/%Y')
+                        event['time']=time
+                        event['venue']=venue
+                        event['description']=description
+                        break
 
             database.close()
             cursor.close()
@@ -535,16 +542,20 @@ def clubs_delete_event(club_name,EventID):
 
             # print(res)
 
-            index=CLUBS[club_name]['ids'].index(EventID)
+            # index=CLUBS[club_name]['ids'].index(EventID)
+            for event in CLUBS[club_name]['announcements']:
+                if event['id']==EventID:
+                    del CLUBS[club_name]['announcements'][CLUBS[club_name]['announcements'].index(event)]
+                    break
 
-            CLUBS[club_name]['announcements'].pop(index)
-            CLUBS[club_name]['ids'].pop(index)
+            # CLUBS[club_name]['announcements'].pop(index)
+            # CLUBS[club_name]['ids'].pop(index)
             CLUBS[club_name]['total-announcements'] -= 1
-            CLUBS[club_name]['date'].pop(index)
-            CLUBS[club_name]['time'].pop(index)
-            CLUBS[club_name]['venue'].pop(index)
-            EVENT_IDS.remove(EventID)
-
+            # CLUBS[club_name]['date'].pop(index)
+            # CLUBS[club_name]['time'].pop(index)
+            # CLUBS[club_name]['venue'].pop(index)
+            # EVENT_IDS.remove(EventID)
+            print("Deleted Event")
             flash("Deleted Event with ID : "+EventID,'message')
             return redirect('/clubs/'+club_name+'/admin')
         else:

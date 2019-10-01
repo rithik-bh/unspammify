@@ -39,27 +39,21 @@ WELCOME TO '{{ CLUBS[name_of_club]['name'] }}'
 <br /><br /><br /><br />
 <h1>ANNOUNCEMENTS</h1>
 
-<table>
-    <tr>
-        <th>Event ID</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Venue</th>
-        <th>Description</th>
-        <th>INTERESTED?</th>
-    </tr>
-    {% for i in range(CLUBS[name_of_club]['total-announcements']) %}
-    <tr>
-        <td>{{ CLUBS[name_of_club]['ids'][i] }}</td>
-        <td>{{ CLUBS[name_of_club]['date'][i] }}</td>
-        <td>{{ CLUBS[name_of_club]['time'][i] }}</td>
-        <td>{{ CLUBS[name_of_club]['venue'][i] }}</td>
-        <td>{{ CLUBS[name_of_club]['announcements'][i] }}</td>
-        <td><a href="/clubs/{{name_of_club}}/events/add-to-fav/{{CLUBS[name_of_club]['ids'][i]}}"><input type="button"
-                    value="INTERESTED?"></a></td>
-    </tr>
-    {% endfor %}
-</table>
+{% for event in CLUBS[name_of_club]['announcements'] %}
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title"><b>{{CLUBS[name_of_club]['name']}}</b></h5>
+        <p class="card-text" style="color:black;">{{event['description']}}</p>
+        <h6 class="card-subtitle mb-2 text-muted">Date : {{event['date']}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Time : {{event['time']}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Venue : {{event['venue']}}</h6>
+        <h6 class="card-subtitle mb-2 text-muted">Event ID : {{event['id']}}</h6>
+
+        <a href="/clubs/{{name_of_club}}/events/add-to-fav/{{event['id']}}" class="card-link"><input type="button"
+                value="INTERESETED"></a>
+    </div>
+</div>
+{% endfor %}
 {% endif %}
 
 {% if CLUBS[name_of_club]['total-announcements']==0 %}

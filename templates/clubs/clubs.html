@@ -27,8 +27,10 @@ BENNETT UNIVERSITY CLUBS
                 <a href="/clubs/{{CLUBS[club]['endpoint']}}/home" target="_blank">
                     <h5 class="card-title" style="color:black;"><b>{{ CLUBS[club]['name'] }}</b></h5>
                 </a>
-                <a href="/clubs/{{CLUBS[club]['endpoint']}}/events" class="card-link">EVENTS</a>
-                <a href="/clubs/{{CLUBS[club]['endpoint']}}/admin/login" class="card-link">ADMIN LOGIN</a>
+                <a href="/clubs/{{CLUBS[club]['endpoint']}}/events" class="card-link"><input type="button"
+                        value="EVENTS"></a>
+                <a href="/clubs/{{CLUBS[club]['endpoint']}}/admin/login" class="card-link"><input type="button"
+                        value="ADMIN LOGIN"></a>
             </div>
         </div>
         {% endfor %}

@@ -10,11 +10,6 @@ Admin Panel : {{ CLUBS[name_of_club]['name'] }}
 
 {% block style %}
 <style>
-    a {
-        text-decoration: none;
-        color: black;
-    }
-
     table,
     th,
     td {
@@ -35,39 +30,29 @@ Admin Panel : {{ CLUBS[name_of_club]['name'] }}
 
 <body>
     {% block body %}
-    <a href="/clubs/{{CLUBS[name_of_club]['endpoint']}}/admin/add">ADD NEW EVENT</a>
+    <a href="/clubs/{{CLUBS[name_of_club]['endpoint']}}/admin/add"><input type="button" value="ADD NEW EVENT"></a>
 
     {% if CLUBS[name_of_club]['total-announcements']!=0 %}
     <br /><br /><br /><br />
     <h1>ANNOUNCEMENTS</h1>
 
-    <table>
-        <tr>
-            <th>Event ID</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Venue</th>
-            <th>Description</th>
-            <th>Modify</th>
-            <th>Delete</th>
+    {% for event in CLUBS[name_of_club]['announcements'] %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title"><b>{{CLUBS[name_of_club]['name']}}</b></h5>
+            <p class="card-text" style="color:black;">{{event['description']}}</p>
+            <h6 class="card-subtitle mb-2 text-muted">Date : {{event['date']}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Time : {{event['time']}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Venue : {{event['venue']}}</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Event ID : {{event['id']}}</h6>
 
-        </tr>
-        {% for i in range(CLUBS[name_of_club]['total-announcements']) %}
-        <tr>
-            <td>{{ CLUBS[name_of_club]['ids'][i] }}</td>
-            <td>{{ CLUBS[name_of_club]['date'][i] }}</td>
-            <td>{{ CLUBS[name_of_club]['time'][i] }}</td>
-            <td>{{ CLUBS[name_of_club]['venue'][i] }}</td>
-            <td>{{ CLUBS[name_of_club]['announcements'][i] }}</td>
-            <td><a
-                    href="/clubs/{{CLUBS[name_of_club]['endpoint']}}/admin/modify/{{CLUBS[name_of_club]['ids'][i]}}">MODIFY</a>
-            </td>
-            <td><a
-                    href="/clubs/{{CLUBS[name_of_club]['endpoint']}}/admin/delete/{{CLUBS[name_of_club]['ids'][i]}}">DELETE</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+            <a href="/clubs/{{CLUBS[name_of_club]['endpoint']}}/admin/modify/{{event['id']}}" class="card-link"><input
+                    type="button" value="MODIFY"></a>
+            <a href="/clubs/{{CLUBS[name_of_club]['endpoint']}}/admin/delete/{{event['id']}}" class="card-link"><input
+                    type="button" value="DELETE"></a>
+        </div>
+    </div>
+    {% endfor %}
     {% endif %}
 
     {% endblock %}
