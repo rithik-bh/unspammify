@@ -9,27 +9,6 @@ BU Club : {{ CLUBS[name_of_club]['name'] }}
 WELCOME TO '{{ CLUBS[name_of_club]['name'] }}'
 {% endblock %}
 
-
-{% if show_events==1 %}
-{% block style %}
-<style>
-    table,
-    th,
-    td {
-        border: 1px solid black;
-        border-collapse: collapse;
-    }
-
-    th,
-    td {
-        padding: 15px;
-        text-align: center;
-    }
-</style>
-{% endblock %}
-{% endif %}
-
-
 {% block body %}
 {{ CLUBS[name_of_club]['description'] }}
 
