@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% block title %}
+BU Clubs
+{% endblock %}
+
+{% block heading %}
+BENNETT UNIVERSITY CLUBS
+{% endblock %}
+
+{% block style %}
+<style>
+    table,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    td {
+        padding: 15px;
+        text-align: center;
+    }
+
+    li {
+        color: black !important;
+    }
+
+    table a {
+        color: black;
+    }
+</style>
+{% endblock %}
+
+<head>
+</head>
+
+<body>
+    {% block content %}
+    <article>
+        <table>
+            {% for club in CLUBS %}
+            <tr>
+                <td><a href="/clubs/{{CLUBS[club]['endpoint']}}/home" target="_blank">{{ CLUBS[club]['name'] }}</a></td>
+                <td><a href="/clubs/{{CLUBS[club]['endpoint']}}/home">HOME</a></td>
+                <td><a href="/clubs/{{CLUBS[club]['endpoint']}}/events">EVENTS</a></td>
+                <td><a href="/clubs/{{CLUBS[club]['endpoint']}}/admin/login">ADMIN LOGIN</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </article>
+    {% endblock %}
+
+</body>
+
+</html>

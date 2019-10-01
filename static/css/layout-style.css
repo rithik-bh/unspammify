@@ -1,0 +1,109 @@
+/* Media Queries: Tablet Landscape */
+@media screen and (max-width: 1060px) {
+  #primary {
+    width: 67%;
+  }
+  #secondary {
+    width: 30%;
+    margin-left: 3%;
+  }
+}
+
+img {
+  width: 15vw;
+  height: auto;
+}
+/* Media Queries: Tabled Portrait */
+@media screen and (max-width: 768px) {
+  #primary {
+    width: 100%;
+  }
+  #secondary {
+    width: 100%;
+    margin: 0;
+    border: none;
+  }
+}
+
+* {
+  font-size: 30px;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.content {
+  color: black;
+}
+a {
+  text-decoration: none;
+}
+body {
+  background-image: url("/static/img/bg3.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+}
+header * {
+  vertical-align: middle;
+}
+header h1 {
+  color: white;
+  font-size: 4vw;
+  width: 75%;
+  text-align: center;
+  padding: 5px;
+  float: right;
+  position: relative;
+  /* margin-top: -5%; */
+  /* vertical-align: middle; */
+  /* white-space: nowrap; */
+}
+
+header {
+  background-color: blue;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  line-height: 50px;
+  height: auto;
+  border: 3px solid black;
+  overflow: auto;
+}
+.content {
+  width: 75%;
+  float: right;
+  margin: 10px;
+  border-radius: 5px;
+  padding: 10px;
+  height: auto;
+}
+
+.vertical-menu {
+  width: 20%;
+  height: auto;
+  margin: 10px;
+  float: left;
+  border: 3px solid black;
+  background-color: #eee;
+  overflow: auto;
+}
+ul {
+  list-style-type: none;
+}
+.vertical-menu a {
+  background-color: #eee; /* Grey background color */
+  color: black; /* Black text color */
+  display: block; /* Make the links appear below each other */
+  padding: 12px; /* Add some padding */
+  text-align: center;
+  text-decoration: none; /* Remove underline from links */
+}
+.vertical-menu ul li {
+  font-size: 2vw;
+}
+
+.vertical-menu a:hover {
+  background-color: #ccc; /* Dark grey background on mouse-over */
+}

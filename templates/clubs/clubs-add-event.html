@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+<!DOCTYPE html>
+<html lang="en">
+
+{% block title %}
+Admin Panel : {{ CLUBS[name_of_club]['name'] }}
+{% endblock %}
+
+{% block heading %}
+'{{ CLUBS[name_of_club]['name'] }}' Admin Panel
+{% endblock %}
+
+<body>
+    {% block content %}
+    <link rel="stylesheet" type="text/css" href="/static/css/login-page-style.css">
+    <div class="box">
+        <h2>Add Event</h2>
+        <form method="POST">
+            <div class="inputBox">
+                {{ form.date.label }}
+                {{ form.date }}
+                {{ form.time.label }}
+                {{ form.time }}
+                {{ form.venue.label }}
+                {{ form.venue }}
+                {{ form.description.label }}
+                {{ form.description }}
+            </div>
+            <input type="submit" name="" value="SUBMIT">
+        </form>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

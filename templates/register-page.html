@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+<html>
+
+{% block title %}
+BU : Register
+{% endblock %}
+
+{% block heading %}
+BENNETT UNIVERSITY REGISTER
+{% endblock %}
+
+<head>
+    <meta charset="utf-8">
+    {% block style %}
+    <link rel="stylesheet" type="text/css" href="/static/css/login-page-style.css">
+    {% endblock %}
+</head>
+<html>
+
+<body>
+    {% block content %}
+    <div class="box">
+        <h2>Register</h2>
+        <form method="POST">
+            <div class="inputBox">
+                {{ form.first_name.label }}
+                {{ form.first_name }}
+            </div>
+            <div class="inputBox">
+                {{ form.last_name.label }}
+                {{ form.last_name }}
+            </div>
+            <div class="inputBox">
+                {{ form.user_id.label }}
+                {{ form.user_id }}
+            </div>
+            <div class="inputBox">
+                {{ form.password.label }}
+                {{ form.password }}
+            </div>
+            <input type="submit" name="" value="SUBMIT">
+        </form>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

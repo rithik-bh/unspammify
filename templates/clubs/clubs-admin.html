@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Admin Panel : {{ CLUBS[name_of_club]['name'] }}
+{% endblock %}
+
+{% block heading %}
+'{{ CLUBS[name_of_club]['name'] }}' Admin Panel <a href="/clubs/{{name_of_club}}/admin/logout">LOGOUT</a>
+{% endblock %}
+
+{% block style %}
+<style>
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        padding: 15px;
+        text-align: center;
+    }
+</style>
+{% endblock %}
+
+
+<html>
+
+<body>
+    {% block content %}
+    <a href="/clubs/{{CLUBS[name_of_club]['endpoint']}}/admin/add">ADD NEW EVENT</a>
+
+    {% if CLUBS[name_of_club]['total-announcements']!=0 %}
+    <br /><br /><br /><br />
+    <h1>ANNOUNCEMENTS</h1>
+
+    <table>
+        <tr>
+            <th>Event ID</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Venue</th>
+            <th>Description</th>
+            <th>Modify</th>
+            <th>Delete</th>
+
+        </tr>
+        {% for i in range(CLUBS[name_of_club]['total-announcements']) %}
+        <tr>
+            <td>{{ CLUBS[name_of_club]['ids'][i] }}</td>
+            <td>{{ CLUBS[name_of_club]['date'][i] }}</td>
+            <td>{{ CLUBS[name_of_club]['time'][i] }}</td>
+            <td>{{ CLUBS[name_of_club]['venue'][i] }}</td>
+            <td>{{ CLUBS[name_of_club]['announcements'][i] }}</td>
+            <td><a
+                    href="/clubs/{{CLUBS[name_of_club]['endpoint']}}/admin/modify/{{CLUBS[name_of_club]['ids'][i]}}">MODIFY</a>
+            </td>
+            <td><a
+                    href="/clubs/{{CLUBS[name_of_club]['endpoint']}}/admin/delete/{{CLUBS[name_of_club]['ids'][i]}}">DELETE</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    {% endblock %}
+</body>
+
+</html>

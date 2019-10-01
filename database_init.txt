@@ -1,0 +1,43 @@
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users`
+(
+  `FirstName` varchar(255) NOT NULL,
+  `LastName` varchar(255) NOT NULL,
+  `ID` varchar(255) NOT NULL UNIQUE,
+  `Password` varchar(100) NOT NULL,
+  `Online` varchar(1) NOT NULL DEFAULT '0',
+  `InterestedActivites` text DEFAULT '';
+);
+
+
+DROP TABLE IF EXISTS `club_descriptions`;
+CREATE TABLE IF NOT EXISTS `club_descriptions`
+(
+  `Name` varchar(255) NOT NULL,
+  `URL_Name` varchar(255) NOT NULL,
+  `Description` text NOT NULL
+);
+
+DROP TABLE IF EXISTS `club_events`;
+CREATE TABLE IF NOT EXISTS `club_events`
+(
+  `EventID` varchar(255) NOT NULL PRIMARY KEY,
+  `URL_Name` varchar(255) NOT NULL,
+  `EventDate` varchar(255) NOT NULL,
+  `EventTime` varchar(255) NOT NULL,
+  `EventVenue` varchar(255) NOT NULL,
+  `EventDescription` text NOT NULL
+);
+
+DROP TABLE IF EXISTS `admins`;
+CREATE TABLE IF NOT EXISTS `admins`
+(
+  `URL_Name` varchar(255) NOT NULL,
+  `Password` varchar(100) NOT NULL,
+  `Online` varchar(1) NOT NULL DEFAULT '0'
+);
+
+
+
+
+

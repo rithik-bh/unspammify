@@ -1,0 +1,109 @@
+layout for admin here
+
+change navbar and all
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="HandheldFriendly" content="true">
+    {% block head %}
+    <title>{% block title %}Bennett University {% endblock %}</title>
+    <style>
+        body {
+            background-color: black !important;
+        }
+
+        /* The alert message box */
+        .alert {
+            padding: 20px;
+            background-color: #f44336;
+            /* Red */
+            color: white;
+            margin-bottom: 15px;
+        }
+
+        /* The close button */
+        .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* When moving the mouse over the close button */
+        .closebtn:hover {
+            color: black;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/layout-style.css') }}">
+    {% endblock %}
+
+    {% block style %}
+
+
+    {% endblock %}
+</head>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert">
+    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<body>
+    <header>
+        <a href="/">
+            <img src="{{ url_for('static',filename='img/bennett-univ-logo.png') }}" alt="Bennett University Logo">
+        </a>
+        <h1>
+            {% block heading %}
+            BENNETT UNIVERSITY
+            {% endblock %}
+        </h1>
+    </header>
+    <section>
+        <div class="vertical-menu">
+            <nav>
+                <ul>
+                    <a href="/login">
+                        <li>LOGIN</li>
+                    </a>
+                    <a href="/clubs">
+                        <li>CLUBS</li>
+                    </a>
+                    <a href="/register">
+                        <li>REGISTER</li>
+                    </a>
+                    <a href="/logout">
+                        <li>LOGOUT</li>
+                    </a>
+                </ul>
+
+            </nav>
+        </div>
+    </section>
+    {% block body %}
+
+    <section class="content">
+        {% block content %}
+        {% endblock %}
+    </section>
+
+
+    {% endblock %}
+
+</body>
+
+</html> -->

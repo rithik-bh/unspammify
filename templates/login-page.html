@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+<html>
+
+{% block title %}
+BU : Login
+{% endblock %}
+
+{% block heading %}
+BENNETT UNIVERSITY LOGIN
+{% endblock %}
+
+<head>
+    <meta charset="utf-8">
+    {% block style %}
+    <link rel="stylesheet" type="text/css" href="/static/css/login-page-style.css">
+    {% endblock %}
+</head>
+<html>
+
+<body>
+    {% block content %}
+    <div class="box">
+        <h2>Login</h2>
+        <form method="POST" action="{{ url_for('login') }}">
+            <div class="inputBox">
+                {{ form.user_id.label }}
+                {{ form.user_id }}
+            </div>
+            <div class="inputBox">
+                {{ form.password.label }}
+                {{ form.password }}
+            </div>
+            <input type="submit" name="" value="SUBMIT">
+        </form>
+    </div>
+    {% endblock %}
+</body>
+
+</html>
