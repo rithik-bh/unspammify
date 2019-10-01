@@ -12,24 +12,6 @@ BENNETT UNIVERSITY CLUBS
 
 {% block style %}
 <style>
-    table,
-    td {
-        border: 1px solid black;
-        border-collapse: collapse;
-    }
-
-    td {
-        padding: 15px;
-        text-align: center;
-    }
-
-    li {
-        color: black !important;
-    }
-
-    table a {
-        color: black;
-    }
 </style>
 {% endblock %}
 
@@ -37,18 +19,19 @@ BENNETT UNIVERSITY CLUBS
 </head>
 
 <body>
-    {% block content %}
+    {% block body %}
     <article>
-        <table>
-            {% for club in CLUBS %}
-            <tr>
-                <td><a href="/clubs/{{CLUBS[club]['endpoint']}}/home" target="_blank">{{ CLUBS[club]['name'] }}</a></td>
-                <td><a href="/clubs/{{CLUBS[club]['endpoint']}}/home">HOME</a></td>
-                <td><a href="/clubs/{{CLUBS[club]['endpoint']}}/events">EVENTS</a></td>
-                <td><a href="/clubs/{{CLUBS[club]['endpoint']}}/admin/login">ADMIN LOGIN</a></td>
-            </tr>
-            {% endfor %}
-        </table>
+        {% for club in CLUBS %}
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <a href="/clubs/{{CLUBS[club]['endpoint']}}/home" target="_blank">
+                    <h5 class="card-title" style="color:black;"><b>{{ CLUBS[club]['name'] }}</b></h5>
+                </a>
+                <a href="/clubs/{{CLUBS[club]['endpoint']}}/events" class="card-link">EVENTS</a>
+                <a href="/clubs/{{CLUBS[club]['endpoint']}}/admin/login" class="card-link">ADMIN LOGIN</a>
+            </div>
+        </div>
+        {% endfor %}
     </article>
     {% endblock %}
 

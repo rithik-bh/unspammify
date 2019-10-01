@@ -34,7 +34,7 @@ Admin Panel : {{ CLUBS[name_of_club]['name'] }}
 <html>
 
 <body>
-    {% block content %}
+    {% block body %}
     <a href="/clubs/{{CLUBS[name_of_club]['endpoint']}}/admin/add">ADD NEW EVENT</a>
 
     {% if CLUBS[name_of_club]['total-announcements']!=0 %}

@@ -10,7 +10,6 @@ CREATE TABLE IF NOT EXISTS `users`
 );
 
 
-DROP TABLE IF EXISTS `club_descriptions`;
 CREATE TABLE IF NOT EXISTS `club_descriptions`
 (
   `Name` varchar(255) NOT NULL,

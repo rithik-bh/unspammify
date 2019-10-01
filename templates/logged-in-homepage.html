@@ -12,7 +12,7 @@ Hello '{{ name }}' <a href="/user/{{user_id}}/logout">LOGOUT</a>
 {% block style %}
 <style>
     a {
-        color: black;
+        color: white;
     }
 
     table,
@@ -26,6 +26,7 @@ Hello '{{ name }}' <a href="/user/{{user_id}}/logout">LOGOUT</a>
     td {
         padding: 15px;
         text-align: center;
+        color: white;
     }
 </style>
 {% endblock %}
@@ -36,7 +37,7 @@ Hello '{{ name }}' <a href="/user/{{user_id}}/logout">LOGOUT</a>
 <html>
 
 <body>
-    {% block content %}
+    {% block body %}
 
     {% if length>0 %}
     <h1>INTERESETED EVENTS</h1>

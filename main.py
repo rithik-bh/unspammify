@@ -109,25 +109,9 @@ for club in club_data:
     EVENT_IDS.extend(CLUBS[club[1]]['ids'])
     CLUBS[club[1]]['total-announcements'] += 1
 
-
-    # return CLUBS,EVENT_IDS
-
-# INTERESETED_EVENTS=[]
-
-# def getClubData(club_name):
-#     database = getDBConnection()
-#     cur = database.cursor()
-#     cur.execute("SELECT * FROM club_events WHERE URL_Name=%s",[club_name])
-#     res = cur.fetchall()
-#     database.close()
-#     cur.close()
-#     return res
-
-
-
 @app.route("/")
 def index():
-    return render_template('layout.html')
+    return render_template('layout.html',CLUBS=CLUBS)
 
 
 # logout all active users
@@ -343,6 +327,11 @@ def add_to_favourite(club_name,EventID):
         flash("You Need to Login Before Adding Events To Favourites",'error')
         return redirect('/login')
     
+@app.route('/admin/login')
+def login_admin():
+    return 'login admin here'
+
+
 @app.route('/clubs/<string:club_name>/events/remove-from-fav/<string:EventID>')
 def remove_from_favourite(club_name,EventID):
     if 'user_id' in session:

@@ -1,0 +1,7 @@
+Python==3.7.4
+Flask==1.1.1
+Werkzeug==0.15.5
+WTForms==2.2.1
+Flask_WTF==0.14.2
+passlib==1.7.1
+datetime==4.3
