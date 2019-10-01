@@ -10,9 +10,11 @@ body {
 a {
   color: white;
 }
-section.content {
+section[class="content"] {
   padding-top: 100px;
-  align-content: center;
+  width: 95%;
+  justify-content: center;
+  margin: 0 auto;
 }
 .card {
   float: left;
@@ -24,4 +26,27 @@ section.content {
 .card .card-body .card-title,
 .card .card-body .card-link {
   color: black;
+}
+
+input[type="button"] {
+  background-color: yellow;
+  border: 2px solid black;
+  padding: 5px;
+  text-align: center;
+  border-radius: 10px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: 0 3px #999;
+  transition: 0.2s;
+}
+input[type="button"]:hover {
+  font-weight: bold;
+}
+
+input[type="button"]:active {
+  box-shadow: 0 1px #666;
+  transform: translateY(2px);
 }

@@ -14,7 +14,7 @@ Admin Panel : {{ CLUBS[name_of_club]['name'] }}
     {% block body %}
     <link rel="stylesheet" type="text/css" href="/static/css/login-page-style.css">
     <div class="box">
-        <h2>Add Event</h2>
+        <h2>{{CLUBS[name_of_club]['name']}}<br />Add Event</h2>
         <form method="POST">
             <div class="inputBox">
                 {{ form.date.label }}

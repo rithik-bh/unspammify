@@ -9,9 +9,6 @@ HomePage : {{ name }}
 Hello '{{ name }}' <a href="/user/{{user_id}}/logout">LOGOUT</a>
 {% endblock %}
 
-<head>
-    <meta charset="utf-8">
-</head>
 <html>
 
 <body>
@@ -21,14 +18,17 @@ Hello '{{ name }}' <a href="/user/{{user_id}}/logout">LOGOUT</a>
     {% for i in event_data %}
     <div class="card" style="width: 18rem;">
         <div class="card-body">
-            <h5 class="card-title"><b>{{CLUBS[i[1]]['name']}}</b></h5>
+            <h5 class="card-title"><b>{{CLUBS[i[1]]['name']}}</b>
+                <a href="/clubs/{{i[1]}}/events/remove-from-fav/{{i[0]}}" class="card-link">
+                    <input type="button" value="DELETE" style="position:absolute;top:15px;right:15px">
+                </a>
+            </h5>
             <p class="card-text" style="color:black;">{{i[5]}}</p>
             <h6 class="card-subtitle mb-2 text-muted">Date : {{i[2]}}</h6>
             <h6 class="card-subtitle mb-2 text-muted">Time : {{i[3]}}</h6>
             <h6 class="card-subtitle mb-2 text-muted">Venue : {{i[4]}}</h6>
             <h6 class="card-subtitle mb-2 text-muted">Event ID : {{i[0]}}</h6>
-            <a href="/clubs/{{i[1]}}/events/remove-from-fav/{{i[0]}}" class="card-link"><input type="button"
-                    value="DELETE"></a>
+
         </div>
     </div>
     {% endfor %}
