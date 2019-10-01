@@ -155,14 +155,11 @@ def logged_in(user_id):
             'SELECT InterestedActivities FROM users WHERE ID=%s', [user_id])
         interested_events_ids = [x for x in cur.fetchone()][0]
         interested_events_ids = interested_events_ids.split(',')
-        # print(interested_events_ids)
 
         event_data = []
         for event in interested_events_ids:
-            # print(event)
             cur.execute('SELECT * FROM club_events WHERE EventID=%s', [event])
             _event = cur.fetchone()
-            # print(_event)
             if _event != None:
                 _event=list(_event)
                 _event[2]=datetime.strptime(_event[2], '%Y-%m-%d').strftime('%d/%m/%Y')
@@ -170,7 +167,6 @@ def logged_in(user_id):
         name = f'{res[0]} {res[1]}'
         database.close()
         cur.close()
-        # print(event_data)
 
         return render_template('logged-in-homepage.html',user_id=user_id ,name=name,CLUBS=CLUBS, event_data=event_data, length=len(event_data))
     else:
@@ -305,11 +301,6 @@ def add_to_favourite(club_name,EventID):
     else:
         flash("You Need to Login Before Adding Events To Favourites",'error')
         return redirect('/login')
-    
-@app.route('/admin/login')
-def login_admin():
-    return 'login admin here'
-
 
 @app.route('/clubs/<string:club_name>/events/remove-from-fav/<string:EventID>')
 def remove_from_favourite(club_name,EventID):
@@ -318,9 +309,7 @@ def remove_from_favourite(club_name,EventID):
         cursor=database.cursor()
         cursor.execute("SELECT InterestedActivities FROM users WHERE ID=%s",[session['user_id']])
         res=cursor.fetchone()[0]
-        # print("res",res)
         res=res.replace(EventID+",","")
-        # print("res",res)
         cursor.execute("UPDATE users SET InterestedActivities=%s WHERE ID=%s",(res,session['user_id']))
         database.commit()
         database.close()
@@ -391,7 +380,6 @@ class AddEvent(Form):
 # add a new event
 @app.route("/clubs/<string:club_name>/admin/add", methods=['GET', 'POST'])
 def club_names_add_event(club_name):
-    # CLUBS,EVENT_IDS=updateCLUBS(CLUBS,EVENT_IDS)
     if club_name in CLUBS:
         if 'admin-logged-in' in session and session['admin-logged-in']==club_name:
 
@@ -431,7 +419,6 @@ def club_names_add_event(club_name):
                 CLUBS[club_name]['total-announcements'] += 1
                 EVENT_IDS.append(random_id)
 
-                # CLUBS,EVENT_IDS=updateCLUBS(CLUBS,EVENT_IDS)
                 flash(f"Event Added Succesfully [ID : {random_id}]")
         else:
             # admin not logged in 
@@ -512,28 +499,17 @@ def clubs_delete_event(club_name,EventID):
         if 'admin-logged-in' in session and session['admin-logged-in']==club_name:
             database=getDBConnection()
             cursor=database.cursor()
-            # cursor.execute("SELECT E FROM club_events WHERE EventID=%s",[EventID])
-            # res=cursor.fetchall()
             cursor.execute("DELETE FROM club_events WHERE EventID=%s",[EventID])
             database.commit()
             database.close()
             cursor.close()
 
-            # print(res)
-
-            # index=CLUBS[club_name]['ids'].index(EventID)
             for event in CLUBS[club_name]['announcements']:
                 if event['id']==EventID:
                     del CLUBS[club_name]['announcements'][CLUBS[club_name]['announcements'].index(event)]
                     break
 
-            # CLUBS[club_name]['announcements'].pop(index)
-            # CLUBS[club_name]['ids'].pop(index)
             CLUBS[club_name]['total-announcements'] -= 1
-            # CLUBS[club_name]['date'].pop(index)
-            # CLUBS[club_name]['time'].pop(index)
-            # CLUBS[club_name]['venue'].pop(index)
-            # EVENT_IDS.remove(EventID)
             print("Deleted Event")
             flash("Deleted Event with ID : "+EventID,'message')
             return redirect('/clubs/'+club_name+'/admin')
@@ -575,7 +551,6 @@ def admin_login(club_name):
     return render_template('admin-login.html', form=form,name=CLUBS[club_name]['name'])
 
 # ERROR HANDLING
-
 
 @app.errorhandler(404)
 # inbuilt function which takes error as parameter
