@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+<html>
+
+{% block title %}
+Clubs : All Events
+{% endblock %}
+
+<html>
+
+<body>
+    {% block body %}
+    <h1>INTERESTED EVENTS</h1>
+    {% for i in event_data %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title"><b>{{CLUBS[i[1]]['name']}}</b>
+                <a href="/clubs/{{i[1]}}/events/remove-from-fav/{{i[0]}}" class="card-link">
+                    <input type="button" value="DELETE" style="position:absolute;top:15px;right:15px">
+                </a>
+            </h5>
+            <p class="card-text" style="color:black;">{{i[5]}}</p>
+            <h6 class="card-subtitle mb-2"><b>Date : </b>{{i[2]}}</h6>
+            <h6 class="card-subtitle mb-2"><b>Time : </b>{{i[3]}}</h6>
+            <h6 class="card-subtitle mb-2"><b>Venue : </b>{{i[4]}}</h6>
+            <h6 class="card-subtitle mb-2"><b>Event ID : </b>{{i[0]}}</h6>
+        </div>
+    </div>
+    {% endfor %}
+
+    {% for club in CLUBS %}
+    {% for event in CLUBS[club]['announcements'] %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title"><b>{{CLUBS[club]['name']}}</b></h5>
+            <p class="card-text" style="color:black;">{{event['description']}}</p>
+            <h6 class="card-subtitle mb-2"><b>Date : </b>{{event['date']}}</h6>
+            <h6 class="card-subtitle mb-2"><b>Time : </b>{{event['time']}}</h6>
+            <h6 class="card-subtitle mb-2"><b>Venue : </b>{{event['venue']}}</h6>
+            <h6 class="card-subtitle mb-2"><b>Event ID : </b>{{event['id']}}</h6>
+            <a href="/clubs/{{club}}/events/add-to-fav/{{event['id']}}" class="card-link"><input type="button"
+                    value="INTERESTED" style="float: right;">
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+    {% endfor %}
+    {% endblock %}
+</body>
+
+</html>

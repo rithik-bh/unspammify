@@ -12,27 +12,28 @@ BENNETT UNIVERSITY LOGIN
 <head>
     <meta charset="utf-8">
     {% block style %}
-    <link rel="stylesheet" type="text/css" href="/static/css/login-page-style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/form-style.css">
     {% endblock %}
 </head>
 <html>
 
 <body>
     {% block body %}
-    <div class="box">
-        <h2>Login</h2>
-        <form method="POST" action="{{ url_for('login') }}">
-            <div class="inputBox">
-                {{ form.user_id.label }}
-                {{ form.user_id }}
-            </div>
-            <div class="inputBox">
-                {{ form.password.label }}
-                {{ form.password }}
-            </div>
-            <input type="submit" name="" value="SUBMIT">
-        </form>
-    </div>
+    <form method="POST" action="{{ url_for('login') }}">
+        <div class="inputBox">
+            <!-- <label for="user_id">User ID</label>
+            <input type="text" name="user_id" id="user_id" placeholder="User ID"><br> -->
+            {{ form.user_id.label }}
+            {{ form.user_id }}
+        </div>
+        <div class="inputBox">
+            <!-- <label for="password">Password</label>
+            <input type="password" name="password" id="password" placeholder="Password"><br> -->
+            {{ form.password.label }}
+            {{ form.password }}
+        </div>
+        <input type="submit" name="" value="SUBMIT">
+    </form>
     {% endblock %}
 </body>
 

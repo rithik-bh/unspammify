@@ -24,62 +24,98 @@ BENNETT UNIVERSITY
     {% endblock %}
 
     {% block style %}
-
-
     {% endblock %}
 </head>
 
-{% with messages = get_flashed_messages() %}
-{% if messages %}
-{% for message in messages %}
-<script>alert("{{ message }}");</script>
-{% endfor %}
-{% endif %}
-{% endwith %}
-
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="/"><img src="{{ url_for('static',filename='img/bennett-univ-logo.png') }}"
-                alt="Bennett University Logo" width="175">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">HOME<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        CLUBS
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/clubs">CLUBS</a>
-                        <div class="dropdown-divider"></div>
-                        {% for club in CLUBS %}
-                        <a class="dropdown-item" href="/clubs/{{club}}/home">{{ CLUBS[club]['name'] }}</a>
-                        {% endfor %}
-                    </div>
-                </li>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="/"><img src="{{ url_for('static',filename='img/bennett-univ-logo.png') }}"
+                    alt="Bennett University Logo" width="175">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            MY ACCOUNT
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/myaccount">MY ACCOUNT</a>
+                            <a class="dropdown-item" href="/logout">LOGOUT</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">HOME<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            CLUBS
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/clubs">CLUBS</a>
+                            <a class="dropdown-item" href="/clubs/events">EVENTS</a>
+                            <div class="dropdown-divider"></div>
+                            {% for club in CLUBS %}
+                            <a class="dropdown-item" href="/clubs/{{club}}/home">{{ CLUBS[club]['name'] }}</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                    {% block logged_in_nav_item %}
 
-                <li class="nav-item">
-                    <a class="nav-link" href="/login">LOGIN USER</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/register">REGISTER</a>
-                </li>
+                    {% endblock %}
 
-            </ul>
-        </div>
-    </nav>
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            LOGIN
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/login">LOGIN</a>
+                            <a class="dropdown-item" href="/register">REGISTER</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
     <section class="content">
+        <!-- flashed messages -->
+        <div class="container-fluid" style="min-height:100%">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category,message in messages %}
+            <div class="alert alert-{{category}} alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">x</span></button>
+                {{message}}
+            </div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
         {% block body %}
-        {% endblock %}
-    </section>
+        <section class="banner">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8">
+                        <h2>BENNETT UNIVERSITY</h2>
+                        <p>A TIMES GROUP INITIATIVE<br />
+                            The Times of India Group, began its operations in 1838 and is India’s oldest and largest
+                            media house. The Times of India, is the World’s largest-selling English newspaper, with over
+                            5 million copies sold daily. The Economic Times is the World’s 2nd largest English business
+                            newspaper, second only to The Wall Street Journal, with over 800,000 copies sold daily.</p>
+                    </div>
+                </div>
+            </div>
+            {% endblock %}
+        </section>
 
 </body>
 
