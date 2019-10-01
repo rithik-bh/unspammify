@@ -312,12 +312,25 @@ def clubs():
 
 @app.route("/clubs/events")
 def clubs_all_events():
-    return render_template('clubs/clubs-all-events.html', CLUBS=CLUBS)
+        if 'user_id' in session:
+            # user is logged in
+            return render_template('clubs/clubs-all-events.html', CLUBS=CLUBS)
+        else:
+            flash("You Need to Login to Access Club Events Data",'danger')
+            return redirect('/login')
+    
 
 
 @app.route('/clubs/<string:club_name>/events/add-to-fav/<string:EventID>')
 def add_to_favourite(club_name, EventID):
     if 'user_id' in session:
+        redirect_user=True
+        if EventID[-1]=='|':
+            # not redirect user here
+            EventID=EventID[:-1]
+            redirect_user=False
+        print(EventID,redirect_user)
+        
         database, cursor = getDBConnection()
         cursor.execute("SELECT InterestedActivities FROM users WHERE ID=%s", [
                        session['user_id']])
@@ -332,7 +345,10 @@ def add_to_favourite(club_name, EventID):
             flash("Added To Favourites",'success')
             database.close()
             cursor.close()
-        return redirect('/clubs/'+club_name+'/events')
+        if redirect_user:
+            return redirect('/clubs/'+club_name+'/events')
+        else:
+            return redirect('/clubs/events')
     else:
         flash("You Need to Login Before Adding Events To Favourites", 'danger')
         return redirect('/login')
