@@ -22,6 +22,7 @@ section[class="content"] {
   border-radius: 20px;
   padding: 10px;
   margin: 10px;
+  width: 100%;
   background: linear-gradient(to bottom right, yellow, green, red);
 }
 .card .card-body .card-title,
@@ -41,7 +42,7 @@ input[type="button"] {
   cursor: pointer;
   outline: none;
   box-shadow: 0 3px #999;
-  transition: 0.2s;
+  transition: 0.1s;
 }
 input[type="button"]:hover {
   font-weight: bold;
@@ -81,5 +82,6 @@ header {
   display: block;
 }
 .dropdown .dropdown-menu a:hover {
-  background-color: cyan;
+  background-color: gold;
+  font-weight: bold;
 }
