@@ -5,8 +5,7 @@ CREATE TABLE IF NOT EXISTS `users`
   `LastName` varchar(255) NOT NULL,
   `ID` varchar(255) NOT NULL UNIQUE,
   `Password` varchar(100) NOT NULL,
-  `Online` varchar(1) NOT NULL DEFAULT '0',
-  `InterestedActivites` text DEFAULT '';
+  `InterestedActivites` text
 );
 
 
@@ -32,11 +31,5 @@ DROP TABLE IF EXISTS `admins`;
 CREATE TABLE IF NOT EXISTS `admins`
 (
   `URL_Name` varchar(255) NOT NULL,
-  `Password` varchar(100) NOT NULL,
-  `Online` varchar(1) NOT NULL DEFAULT '0'
+  `Password` varchar(100) NOT NULL
 );
-
-
-
-
-

@@ -56,15 +56,13 @@ BENNETT UNIVERSITY
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            CLUBS
+                            ACTIVITIES
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/clubs">CLUBS</a>
-                            <a class="dropdown-item" href="/clubs/events">EVENTS</a>
-                            <div class="dropdown-divider"></div>
-                            {% for club in CLUBS %}
-                            <a class="dropdown-item" href="/clubs/{{club}}/home">{{ CLUBS[club]['name'] }}</a>
-                            {% endfor %}
+                            <a class="dropdown-item" href="/houses">HOUSES</a>
+                            <a class="dropdown-item" href="/university-led-activities">UNIVERSITY LED ACTIVITIES</a>
+                            <a class="dropdown-item" href="/clubs/events">ALL EVENTS</a>
                         </div>
                     </li>
                     {% block logged_in_nav_item %}
